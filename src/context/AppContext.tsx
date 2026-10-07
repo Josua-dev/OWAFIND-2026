@@ -46,6 +46,7 @@ interface AppContextValue {
   setConsentGiven: (v: boolean) => void;
 
   resetDemo: () => void;
+  logout: () => void;
 }
 
 const AppContext = createContext<AppContextValue | undefined>(undefined);
@@ -179,6 +180,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setConsentGiven(false);
   };
 
+  const logout = () => {
+    resetDemo();
+    navigate('/login', { replace: true });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -208,6 +214,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         consentGiven,
         setConsentGiven,
         resetDemo,
+        logout,
       }}
     >
       {children}

@@ -1,12 +1,13 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Search as SearchIcon } from 'lucide-react';
+import { Menu, X, Search as SearchIcon, LogOut } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { cn } from '@/utils/format';
 import { Logo } from '@/components/shared/Logo';
 import { RoleSwitcher } from '@/components/shared/RoleSwitcher';
 import { NotificationBell } from '@/components/shared/NotificationBell';
 import { GlobalSearch } from '@/components/shared/GlobalSearch';
+import { useApp } from '@/context/AppContext';
 
 interface NavItem {
   label: string;
@@ -67,7 +68,7 @@ const iconMap: Record<string, ReactNode> = {
 };
 
 export function BeneficiaryLayout({ children }: { children: ReactNode }) {
-  const role = 'beneficiary';
+  const { role, logout } = useApp();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -196,6 +197,10 @@ export function BeneficiaryLayout({ children }: { children: ReactNode }) {
             </div>
             <NotificationBell />
             <RoleSwitcher />
+            <button onClick={logout} className="text-sm text-slate-600 hover:text-slate-900">
+              Sign Out
+              <LogOut className="w-4 h-4 ml-1" />
+            </button>
           </div>
         </header>
 
