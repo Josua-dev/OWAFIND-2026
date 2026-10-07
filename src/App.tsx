@@ -32,6 +32,7 @@ const AuditLogPage = lazy(() => import('@/pages/institution/AuditLogPage').then(
 const RegulatorDashboard = lazy(() => import('@/pages/RegulatorDashboard').then((m) => ({ default: m.RegulatorDashboard })));
 const ExecutiveDashboard = lazy(() => import('@/pages/ExecutiveDashboard').then((m) => ({ default: m.ExecutiveDashboard })));
 const AdminDashboard = lazy(() => import('@/pages/AdminDashboard').then((m) => ({ default: m.AdminDashboard })));
+const LoginPage = lazy(() => import('@/pages/LoginPage').then((m) => ({ default: m.LoginPage })));
 
 function PageLoader() {
   return (
@@ -110,12 +111,14 @@ function AppRoutes() {
   const isSearching = location.pathname === '/app/searching';
 
   const isStandalone = isLanding || isDiscovery || isSearching;
+  const isLogin = location.pathname === '/login';
 
-  if (isStandalone) {
+  if (isStandalone || isLogin) {
     return (
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/app/discovery" element={<DiscoveryWizard />} />
           <Route path="/app/searching" element={<SearchingPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />

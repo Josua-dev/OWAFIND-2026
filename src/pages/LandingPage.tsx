@@ -59,7 +59,7 @@ export function LandingPage() {
             <a href="#trust" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">Trust</a>
             <a href="#ecosystem" className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors">Ecosystem</a>
           </div>
-          <Link to="/app/dashboard">
+          <Link to="/login">
             <Button size="sm" variant="primary">
               Sign In
               <ArrowRight className="w-3.5 h-3.5" />

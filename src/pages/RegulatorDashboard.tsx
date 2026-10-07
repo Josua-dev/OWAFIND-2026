@@ -8,7 +8,7 @@ import { analyticsService, institutionService } from '@/services';
 import { useApp } from '@/context/AppContext';
 import { seedAuditEvents } from '@/data/seed';
 import { formatCurrencyShort } from '@/utils/format';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend, PieChart, Pie, AreaChart, Area, Cell } from 'recharts';
 
 const PIE_COLORS = ['#3d8378', '#54988e', '#84bcb3', '#fd7e14', '#f59e0b', '#ef4444'];
 
@@ -43,7 +43,8 @@ export function RegulatorDashboard() {
   const systemAuditEvents = seedAuditEvents.filter(
     (e) => e.actor === 'System' || e.actor.includes('Officer')
   );
-  const beneficiaryAuditEvents = seedAuditEvents.filter((e) => e.actor === profile.name);
+  const beneficiaryName = `${profile.firstName} ${profile.lastName}`;
+  const beneficiaryAuditEvents = seedAuditEvents.filter((e) => e.actor === beneficiaryName);
 
   const statCards = [
     { label: 'Total Potential Benefits', value: formatCurrencyShort(stats.totalBenefits), icon: TrendingUp, color: 'bg-primary-50 text-primary-600' },
@@ -181,7 +182,7 @@ export function RegulatorDashboard() {
               <thead><tr className="text-left text-xs text-slate-400 border-b border-slate-100">
                 <th className="px-4 py-3 font-medium">Institution</th>
                 <th className="px-4 py-3 font-medium">Type</th>
-                <th className="px-4 py-3 font-medium hidden md:table-cell">Region</th>
+                <th className="px-4 py-3 text-slate-500 hidden md:table-cell">Region</th>
                 <th className="px-4 py-3 font-medium">Matches</th>
                 <th className="px-4 py-3 font-medium">Claims</th>
                 <th className="px-4 py-3 font-medium hidden lg:table-cell">Pending</th>

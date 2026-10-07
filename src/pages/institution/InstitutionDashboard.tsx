@@ -49,7 +49,8 @@ export function InstitutionDashboard() {
   const systemEvents = seedAuditEvents.filter(
     (e) => e.actor === 'System' || e.actor.includes('Officer')
   );
-  const beneficiaryEvents = seedAuditEvents.filter((e) => e.actor === profile.name);
+  const beneficiaryName = `${profile.firstName} ${profile.lastName}`;
+  const beneficiaryEvents = seedAuditEvents.filter((e) => e.actor === beneficiaryName);
 
   const statCards = [
     { label: 'Potential Matches', value: stats.matches.toLocaleString(), icon: Target, color: 'bg-primary-50 text-primary-600' },
